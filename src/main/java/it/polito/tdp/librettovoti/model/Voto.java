@@ -2,16 +2,20 @@ package it.polito.tdp.librettovoti.model;
 
 public class Voto {
 	private String nome ;
-	private int punti ;
-	
+	private int punti ; //la chiamo punti per non fare confusione con il nome della Classe
+	 
+	//costruttore che inizializza 
 	public Voto(String nome, int punti) {
 		super();
 		this.nome = nome;
 		this.punti = punti;
 	}
+	//getter degli attributi, leggibili e scrivibili
 	public String getNome() {
 		return nome;
 	}
+	
+	//setter
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -22,10 +26,13 @@ public class Voto {
 		this.punti = punti;
 	}
 	
+	//chiedo a Eclipse, che lo crea sulla base delle proprietà, modifico sulla base dei gusti
 	@Override
 	public String toString() {
 		return nome+" : "+ punti;
 	}
+	
+	//generati da Eclipse sul criterio da noi scelto, devono andare insieme anche se hashCode ora non ci serve
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,6 +43,7 @@ public class Voto {
 	}
 	@Override
 	public boolean equals(Object obj) {
+		//controllo completo
 		if (this == obj)
 			return true;
 		if (obj == null)
