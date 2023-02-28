@@ -10,7 +10,8 @@ public class Libretto {
 	
 	//senza parametri perchè posso non avere nulla 
 	public Libretto() {
-		this.voti = new ArrayList<Voto>() ; //nel costruttore definisco la struttura dati necessaria
+		this.voti = new ArrayList<Voto>() ; 
+		//nel costruttore definisco la struttura dati necessaria
 		//l'operazione new si fa in luoghi controllati, ne parleremo nei pattern
 	}
 	
@@ -26,7 +27,7 @@ public class Libretto {
 		}
 	}
 	
-	//metodo che filta, mi restituisce un oggetto di tipo Libretto (quindi elenco di esami ) in cui il voto è uguale ad una soglia
+	//metodo che filtra, mi restituisce un oggetto di tipo Libretto (quindi elenco di esami ) in cui il voto è uguale ad una soglia
 	// lista vuota che riempio. scelta migliore, e non string o void come parametro restituito
 	public Libretto filtraPunti(int punti) {
 		Libretto result = new Libretto() ;

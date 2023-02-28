@@ -12,22 +12,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.librettovoti.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.librettovoti.FXMLController">
    <top>
       <Label text="Libretto Voti" BorderPane.alignment="CENTER">
          <font>
-            <Font size="36.0" />
+            <Font size="35.0" />
          </font>
       </Label>
    </top>
    <center>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="txtVoti" />
+            <TextArea fx:id="txtVoti" editable="false" prefHeight="200.0" prefWidth="200.0" />
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="143.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="10.0" prefWidth="335.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,8 +35,16 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Nome corso" />
-                  <Label text="Punteggio" GridPane.rowIndex="1" />
+                  <Label text="Nome Corso">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="Punteggio" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
                   <TextField fx:id="txtNome" GridPane.columnIndex="1" />
                   <ComboBox fx:id="cmbPunti" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" onAction="#handleNuovoVoto" text="Aggiungi" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -45,7 +53,4 @@
          </children>
       </VBox>
    </center>
-   <bottom>
-      <Label fx:id="txtStatus" alignment="TOP_LEFT" textAlignment="CENTER" textFill="RED" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>
