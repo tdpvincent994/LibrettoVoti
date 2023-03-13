@@ -19,7 +19,7 @@ public class Libretto {
 	//metodi per aggiungere un elemento, restituisce se è stato aggiunto o meno per avere coscienza
 	//parametro oggetto Voto, perchè svincola da modifiche future su Voto, non devo modificare nulla
 	public boolean add(Voto v) {
-		if(!isDuplicato(v) && !isConflitto(v)) { //verifico che non esista però
+		if(!isDuplicato(v) && !isConflitto(v)) { //verifico che non esista già però
 			this.voti.add(v); //uso il metodo della List, delega. Mi restituisce un boolean, meglio essere in linea con il metodo allora
 			return true ;
 		} else {
@@ -83,19 +83,21 @@ public class Libretto {
 	}
 	
 	
-
+//restituisce un nuovo Libretto, una copia, con le specifiche indicate
+	//devo inoltre inserire nella parte grafica e controller il button apposito
 	public Libretto votiMigliorati() {
-		Libretto nuovo = new Libretto() ;
+		Libretto nuovo = new Libretto() ; //una copia che filtra, in base alle specifiche
 		for(Voto v: this.voti) {
 			int punti = v.getPunti() ;
 			if(punti>=24)
 				punti +=2 ;
 			else 
-				punti++ ;
+				punti++ ;  
 			if (punti>30)
 				punti=30 ;
 
-			// NOOOO va a modificare l'oggetto nel libretto originale
+			// NOOOO, v punta all'oggetto della lista originale
+			// andrebbe quindi a  modificare l'oggetto nel libretto originale il codice seguente
 			//			v.setPunti(punti);
 			//			nuovo.add(v) ;
 			
@@ -105,7 +107,10 @@ public class Libretto {
 	}
 	
 	
-	// FUNZIONERÀ COSÌ??? Proviamo... e capiamo perché
+	// FUNZIONERÀ COSÌ??? Proviamo... e capiamo perché. Lo vedremo perchè non funziona, devo inoltre inserire nella parte grafica e controller il button apposito
+	// metodo remove dell'oggetto lista con l'oggetto che voglio eliminare, verificando tramite confronto
+	//elimina solo la prima occorrenza, (ma nel nostro caso non ho duplicati per costruzione), se non lo trova
+	// non si arrabbia
 	public void cancellaVotiMinori(int punti) {
 		for(Voto v: this.voti) {
 			if(v.getPunti()<punti)

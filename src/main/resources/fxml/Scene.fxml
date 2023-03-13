@@ -53,4 +53,7 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <Label fx:id="txtStatus" textFill="#dd0909" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

@@ -1,6 +1,7 @@
 package it.polito.tdp.librettovoti;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.librettovoti.model.Libretto;
@@ -8,6 +9,7 @@ import it.polito.tdp.librettovoti.model.Voto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -34,19 +36,49 @@ public class FXMLController {
     @FXML
     private TextArea txtVoti;
 
+    //campo per indicare errore nell'inserimento
+    @FXML
+    private Label txtStatus;
+    
     @FXML
     void handleNuovoVoto(ActionEvent event) {
-    	//ricavo i dati dai campi corretti 
+    	//1.ricavo i dati dai campi corretti 
     	String nome= txtNome.getText();
-    	int punti =cmbPunti.getValue(); //valore selezionato dall'utente
+    	Integer punti =cmbPunti.getValue(); //valore selezionato dall'utente, null altrimenti quindi attenzione meglio usare Integer
     	
-    	//controllo sui parametri inseriti ed eventuale inserimento del voto
+    	//controllo sui parametri inseriti ed eventuale inserimento del voto richiamando metodi del model
+    	if (nome.equals("") || punti==null) {
+    		//errore, non posso eseguire l'operazione, aggiungo all'interfaccia 
+    		//oppure lo scrivo nella textArea. Non è un controllo così ben fatto
+    		txtVoti.setText("Errore: occorre inserire nome/voto\n");
+    		txtStatus.setText("Errore inserimento");
+    		return;
+    	}
+    	
+    	//2.Esecuzione dell'operazione (chiedere al model)
+    	//per farlo devono comunicare tramite oggetti, verificando l'esito
+    	boolean ok=model.add(new Voto(nome, punti)); 
+    	
+    	//3.verifico che sia andato tutto a buon fine aggiornando il risultato nel view
+    	// Aggiungo al model un metodo per stampare una Lista, getVoti
+    	if (ok) { //inserimento avvenuto 
+    	List <Voto> voti = model.getVoti();
+    	txtVoti.clear(); //pulisco l'area di testo
+    	txtVoti.appendText("Hai superato i seguenti esami\n");
+    	
+    	for (Voto v: voti) {
+    		txtVoti.appendText(v.toString()+"\n");
+    	}
+    	
+    	//Resetto elementi interfaccia grafica
+    	txtNome.clear();
+    	cmbPunti.setValue(null);
+		txtStatus.setText("");
 
-    	model.add(new Voto(nome, punti)); 
-    	
-    	//verifico che sia andato tutto a buon fine stampando sulla textArea
-    	String contenutoLibretto= model.toString();
-    	txtVoti.setText(contenutoLibretto);
+    }
+    	else {
+    		txtStatus.setText("Errore: esame già presente");
+    	}
     }
 
     //in questo metodo inizializzo la parte grafica
