@@ -1,6 +1,7 @@
 package it.polito.tdp.librettovoti.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 //per gestire una lista di voti
@@ -106,16 +107,63 @@ public class Libretto {
 		return nuovo ;
 	}
 	
+
+	/*Allo stesso modo di votiMigliorati, lavoro su un libretto nuovo che ordino */
+	public Libretto librettoOrdinatoAlfabeticamente() {
+		Libretto ordinato = new Libretto();
+		ordinato.voti = new ArrayList<>(this.voti); //copio il contenuto
+		
+		//richiamo il metodo sort e gli passo la classe estern che implementa il metodo compare
+		ordinato.voti.sort(new ComparatorByName());
+		
+		//Collections.sort(ordinato.voti, new ComparatorByName()); //stessa cosa alla riga sopra
+		return ordinato;
+	}
 	
-	// FUNZIONERÀ COSÌ??? Proviamo... e capiamo perché. Lo vedremo perchè non funziona, devo inoltre inserire nella parte grafica e controller il button apposito
-	// metodo remove dell'oggetto lista con l'oggetto che voglio eliminare, verificando tramite confronto
-	//elimina solo la prima occorrenza, (ma nel nostro caso non ho duplicati per costruzione), se non lo trova
-	// non si arrabbia
+
+	/*Allo stesso modo di votiMigliorati, lavoro su un libretto nuovo che ordino ma questa volta usando una classe anonima */
+	public Libretto librettoOrdinatoPuntiDecrescente() {
+		Libretto ordinato = new Libretto();
+		ordinato.voti = new ArrayList<>(this.voti); //copio il contenuto
+		
+		//richiamo il metodo sort e gli passo la classe esterna che implementa il metodo compare, richiamando l'interfaccia Comparator
+		//le parentesi () dopo <> rappresentano il costruttore della classe anonima che viene definita in line
+		//all'interno di essa definisco i metodi che voglio implementare
+		ordinato.voti.sort(new Comparator<Voto>() {
+
+			@Override
+			public int compare(Voto o1, Voto o2) {
+				//ordinamento descrescente dei punti quindi , o2.punti- o1.punti
+				return o2.getPunti()-o1.getPunti();
+			}
+		});
+		
+		return ordinato; // ora la lista conterra Voti i quali punteggi saranno ordinati in modo descrescente
+	}
+	
+	// FUNZIONERÀ COSÌ??? Proviamo... e capiamo perché.
+	// ATTENZIONE  iterando e cancellando allo stesso tempo sulla stessa lista non funziona,
+	// perchè cambia la dimensione. Occorre separare i momenti
+	// aggiungo in una nuova lista quello che devo cancellare e poi
+	// dalla prima elimino quello che fa match con la seconda
+	
 	public void cancellaVotiMinori(int punti) {
+		
+		List <Voto> daCancellare =new ArrayList<Voto>();
 		for(Voto v: this.voti) {
 			if(v.getPunti()<punti)
-				this.voti.remove(v) ;
+				// this.voti.remove(v) ;
+				daCancellare.add(v); //conterra solo gli elementi da cancellare
+				
 		}
+		//adesso elimino da quella originale ciò che fa match, quindi itero e cancello ma su liste diverse
+		for (Voto v1: daCancellare) {
+			this.voti.remove(v1); //da quella originale elimino quello che devo
+		}
+		
+		//Metodo migliore che fa la stessa cosa, da preferire questo
+		//this.voti.removeAll(daCancellare); 
+		
 	}
 	
 	//richiamo quella della lista che mi inserisce le [,,], devo modificare anche la toString dell'oggetto Voto 

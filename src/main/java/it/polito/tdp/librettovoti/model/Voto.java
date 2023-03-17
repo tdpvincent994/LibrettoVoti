@@ -61,7 +61,12 @@ public class Voto {
 		return true;
 	}
 	
-	
+
+	//Per quanto riguarda la comparazione tra oggetti Voto, esiste una comparazione naturale obiettiva? no
+	//Non ha senso quindi definire il metodo compareTo (Voto other) e implementare Comparable qui. Comparable
+	//Ho due soluzioni che implemento entrambe:
+	//1. Dichiaro una classe esterna che implementa l'interfaccia COMPARATOR e il metodo compare
+	//2. Utilizzo una classe anonima che implementa l'interfaccia COMPARATOR e il metodo compare
 	
 		
 }
