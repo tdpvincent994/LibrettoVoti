@@ -1,0 +1,21 @@
+Per installare MariaDb, https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04
+
+sudo apt update
+sudo apt install mariadb-server
+sudo mysql_secure_installation
+
+n per le questions successive
+
+poi per creare un profilo per l'accesso 
+
+sudo mariadb
+
+#Then create a new user with root privileges and password-based access. Be sure to change the username and password to match your preferences:
+GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit
+
+sudo systemctl status mariadb
+
+
+Successivamente installare HeidiSql, uno strumento grafico che consente di accedere a MariaDb
