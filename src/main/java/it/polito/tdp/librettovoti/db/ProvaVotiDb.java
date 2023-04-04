@@ -11,7 +11,7 @@ public class ProvaVotiDb {
 
 	public void aggiungiVoto(String nome, int punti) {
 		// in seguito avremo un punto centralizzato e non ripetizione, maggiore sicurezza non passando dati sensibili cosi
-		String url = "jdbc:mysql://localhost:3306/Libretto?user=admin&password=password";
+		String url = "jdbc:mysql://localhost:3306/Libretto?user=vincent&password=16scudetti";
 
 		try {
 			Connection conn = DriverManager.getConnection(url);
