@@ -23,10 +23,12 @@ public class ProvaVotiDb {
 			String template = "INSERT INTO voti (nome, punti) VALUES (?, ?) ";
 			PreparedStatement st = conn.prepareStatement(template);
 
-			// passo i valori al PreperedStatement, posizione e valore nel formato corretto
+			// passo i valori al PreperedStatement, numero e valore nel formato corretto
 			st.setString(1, nome);
 			st.setInt(2, punti);
 
+			//Attenzione usare il metodo senza argomenti, esiste quello con argomento ma errore per ?
+			//quello senza argomenti usa st creato e settato
 			int res = st.executeUpdate();
 
 			// rilascio le risorse
